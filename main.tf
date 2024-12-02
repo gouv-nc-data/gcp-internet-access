@@ -1,3 +1,9 @@
+resource "google_project_service" "activate_api" {
+  for_each = toset(["compute.googleapis.com"])
+  project  = var.project_id
+  service  = each.key
+}
+
 resource "google_compute_network" "default" {
   project                 = var.project_id
   name                    = var.network_name
